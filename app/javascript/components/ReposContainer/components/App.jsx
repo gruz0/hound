@@ -141,9 +141,7 @@ export default class App extends React.Component {
   }
 
   createSubscriptionWithExistingCard(repo) {
-    Ajax.createSubscription({
-      repo_id: repo.id
-    }).then( resp => {
+    Ajax.createSubscription({ repo_id: repo.id }).then( resp => {
       this.activateAndTrackRepoSubscription(
         repo, resp.stripe_subscription_id
       );

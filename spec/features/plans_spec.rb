@@ -8,7 +8,7 @@ RSpec.feature "Plans" do
 
     visit plans_path(repo_id: repo.id)
 
-    expect(page).to have_css(".plan", count: 6)
+    expect(page).to have_css(".plan", count: 7)
 
     within ".plan:nth-of-type(1)" do
       expect(page).to have_content("CURRENT PLAN")
@@ -55,7 +55,7 @@ RSpec.feature "Plans" do
     repo = create(:repo, :private)
     create(:membership, :admin, repo: repo, user: user)
     stub_repository_invitations(repo.name)
-    stub_customer_find_request
+    stub_customer_find_request(user.stripe_customer_id)
     stub_subscription_create_request(
       plan: StripePlan::PLANS.second.fetch(:id),
       repo_ids: repo.id,
